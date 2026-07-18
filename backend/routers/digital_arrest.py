@@ -3,6 +3,8 @@ from pydantic import BaseModel
 from groq import Groq
 import os
 import json
+import uuid
+from datetime import datetime
 from prompts.digital_arrest_prompt import DIGITAL_ARREST_PROMPT
 
 router = APIRouter()
@@ -22,13 +24,14 @@ async def analyze_digital_arrest(input: TextInput):
             model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": DIGITAL_ARREST_PROMPT},
-                {"role": "user", "content": f"Analyse this text:\n\n{input.text}"}
+                {"role": "user", "content": "Analyse this text:\n\n" + input.text}
             ],
             temperature=0.1,
             max_tokens=1000
         )
         raw = response.choices[0].message.content.strip()
         result = json.loads(raw)
+
         score = result.get("risk_score", 0)
         if score <= 20:
             result["verdict"] = "SAFE"
@@ -40,7 +43,13 @@ async def analyze_digital_arrest(input: TextInput):
             result["verdict"] = "HIGH_RISK"
         else:
             result["verdict"] = "CONFIRMED_SCAM"
+
+        result["case_id"] = "TRI-" + str(uuid.uuid4())[:8].upper()
+        result["analyzed_at"] = datetime.utcnow().isoformat() + "Z"
+        result["platform"] = "Trinetra v1.0"
+
         return result
+
     except json.JSONDecodeError:
         raise HTTPException(status_code=500, detail="Model returned invalid JSON. Try again.")
     except Exception as e:

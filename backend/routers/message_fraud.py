@@ -3,6 +3,8 @@ from pydantic import BaseModel
 from groq import Groq
 import os
 import json
+import uuid
+from datetime import datetime
 from prompts.message_fraud_prompt import MESSAGE_FRAUD_PROMPT
 
 router = APIRouter()
@@ -43,6 +45,10 @@ async def analyze_message_fraud(input: TextInput):
         if result.get("data_harvesting_detected") or result.get("payment_requested"):
             if result.get("report_to") == "not_required":
                 result["report_to"] = "cybercrime.gov.in"
+
+        result["case_id"] = "TRI-" + str(uuid.uuid4())[:8].upper()
+        result["analyzed_at"] = datetime.utcnow().isoformat() + "Z"
+        result["platform"] = "Trinetra v1.0"
 
         return result
 

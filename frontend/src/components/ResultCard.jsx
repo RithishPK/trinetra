@@ -170,6 +170,23 @@ export default function ResultCard({ result }) {
           )}
         </div>
       )}
+
+      {result.case_id && (
+        <div className="mt-4 p-3 bg-white/5 rounded-lg border border-white/10 flex justify-between items-center flex-wrap gap-2">
+          <div>
+            <p className="text-white/30 text-xs uppercase tracking-widest">Case ID</p>
+            <p className="text-white/60 text-xs font-mono mt-0.5">{result.case_id}</p>
+          </div>
+          <div>
+            <p className="text-white/30 text-xs uppercase tracking-widest">Analysed at</p>
+            <p className="text-white/60 text-xs font-mono mt-0.5">{result.analyzed_at}</p>
+          </div>
+          <div>
+            <p className="text-white/30 text-xs uppercase tracking-widest">Platform</p>
+            <p className="text-white/60 text-xs font-mono mt-0.5">{result.platform}</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
