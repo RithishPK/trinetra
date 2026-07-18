@@ -1,0 +1,3 @@
+cd C:\Users\rithi\OneDrive\Desktop\trinetra\backend
+venv\Scripts\activate
+uvicorn main:app --reload
