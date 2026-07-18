@@ -12,6 +12,7 @@ DOCUMENT CATEGORIES:
 4. FAKE KYC/BANKING DOCUMENT: Fake bank notices, fake RBI circulars
 5. FAKE CUSTOMS/COURIER NOTICE: "Package detained," clearance fee demanded
 6. UNKNOWN SUSPICIOUS DOCUMENT
+7. LEGITIMATE DOCUMENT: Document shows no significant fraud indicators and appears genuine
 
 REASONING STEP — analyse for:
 
