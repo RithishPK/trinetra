@@ -4,6 +4,7 @@ import Hero from "./components/Hero"
 import DigitalArrestDetector from "./components/DigitalArrestDetector"
 import MessageFraudDetector from "./components/MessageFraudDetector"
 import DocumentVerifier from "./components/DocumentVerifier"
+import ScamReportFeed from "./components/ScamReportFeed"
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("digital-arrest")
@@ -16,6 +17,7 @@ export default function App() {
         {activeTab === "digital-arrest" && <DigitalArrestDetector />}
         {activeTab === "message-fraud" && <MessageFraudDetector />}
         {activeTab === "document-verify" && <DocumentVerifier />}
+        {activeTab === "community" && <ScamReportFeed />}
       </main>
     </div>
   )

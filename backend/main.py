@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from routers import digital_arrest, message_fraud, document_verify
-
+from routers import digital_arrest, message_fraud, document_verify, scam_report
 load_dotenv()
 
 app = FastAPI(
@@ -35,6 +35,12 @@ app.include_router(
     document_verify.router,
     prefix="/api/document-verify",
     tags=["Document Verification"]
+)
+
+app.include_router(
+    scam_report.router,
+    prefix="/api/scam-report",
+    tags=["Community Scam Reporting"]
 )
 
 @app.get("/")

@@ -16,6 +16,12 @@ const tabs = [
     label: "Document Verify",
     icon: "📄",
     desc: "Check fake government notices & offer letters"
+  },
+  {
+    id: "community",
+    label: "Scam Feed",
+    icon: "🗺️",
+    desc: "Community scam reports across India"
   }
 ]
 
