@@ -16,7 +16,7 @@ export default function DocumentVerifier() {
     try {
       const formData = new FormData()
       formData.append("file", file)
-      const res = await axios.post("http://localhost:8000/api/document-verify/analyze", formData, {
+      const res = await axios.post("https://trinetra-backend-209a.onrender.com/api/document-verify/analyze", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       })
       setResult(res.data)
@@ -30,13 +30,13 @@ export default function DocumentVerifier() {
   return (
     <div>
       <div className="mb-6">
-        <h2 className="text-xl font-bold mb-1">Document Verifier</h2>
+        <h2 className="text-lg sm:text-xl font-bold mb-1">Document Verifier</h2>
         <p className="text-white/40 text-sm">
           Upload a suspicious PDF — fake government notice, legal summons, or job offer letter.
         </p>
       </div>
 
-      <div className="border-2 border-dashed border-white/10 rounded-xl p-8 text-center hover:border-orange-500/30 transition-colors">
+      <div className="border-2 border-dashed border-white/10 rounded-xl p-6 sm:p-8 text-center hover:border-orange-500/30 transition-colors">
         <input
           type="file"
           accept=".pdf"
@@ -45,7 +45,7 @@ export default function DocumentVerifier() {
           id="pdf-upload"
         />
         <label htmlFor="pdf-upload" className="cursor-pointer">
-          <div className="text-4xl mb-3">📄</div>
+          <div className="text-3xl sm:text-4xl mb-3">📄</div>
           {file ? (
             <div>
               <p className="text-white/80 text-sm font-medium">{file.name}</p>
@@ -53,7 +53,7 @@ export default function DocumentVerifier() {
             </div>
           ) : (
             <div>
-              <p className="text-white/50 text-sm">Click to upload PDF</p>
+              <p className="text-white/50 text-sm">Tap to upload PDF</p>
               <p className="text-white/20 text-xs mt-1">Fake notices, offer letters, legal summons</p>
             </div>
           )}

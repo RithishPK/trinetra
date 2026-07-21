@@ -34,7 +34,7 @@ export default function ScamReportFeed() {
 
   const fetchFeed = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/api/scam-report/feed")
+      const res = await axios.get("https://trinetra-backend-209a.onrender.com/api/scam-report/feed")
       setFeed(res.data.reports)
     } catch (e) {
       console.error("Feed fetch failed", e)
@@ -76,14 +76,14 @@ export default function ScamReportFeed() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 gap-3">
         <div>
-          <h2 className="text-xl font-bold mb-1">Community Scam Feed</h2>
+          <h2 className="text-lg sm:text-xl font-bold mb-1">Community Scam Feed</h2>
           <p className="text-white/40 text-sm">Real-time scam reports from citizens across India</p>
         </div>
         <button
           onClick={() => { setShowForm(!showForm); setSubmitted(false) }}
-          className="px-4 py-2 rounded-lg bg-orange-500/20 border border-orange-500/30 text-orange-400 text-sm hover:bg-orange-500/30 transition-colors"
+          className="px-3 sm:px-4 py-2 rounded-lg bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs sm:text-sm hover:bg-orange-500/30 transition-colors whitespace-nowrap flex-shrink-0"
         >
           + Report a Scam
         </button>
@@ -96,10 +96,10 @@ export default function ScamReportFeed() {
       )}
 
       {showForm && (
-        <div className="mb-6 p-5 rounded-xl border border-white/10 bg-white/5">
+        <div className="mb-6 p-4 sm:p-5 rounded-xl border border-white/10 bg-white/5">
           <p className="text-white/70 text-sm font-medium mb-4">Report a scam you encountered</p>
 
-          <div className="grid grid-cols-2 gap-3 mb-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
             <div>
               <label className="text-white/40 text-xs uppercase tracking-widest mb-1 block">Scam Type</label>
               <select
@@ -169,7 +169,7 @@ export default function ScamReportFeed() {
           {feed.map((report) => (
             <div key={report.id} className="p-4 rounded-xl border border-white/10 bg-white/5">
               <div className="flex items-start justify-between gap-3">
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2 flex-wrap">
                     <span className={"text-xs px-2 py-0.5 rounded-full border " + scamColor(report.scam_type)}>
                       {report.scam_type}
@@ -180,9 +180,9 @@ export default function ScamReportFeed() {
                       </span>
                     )}
                   </div>
-                  <p className="text-sm text-white/70">{report.description}</p>
+                  <p className="text-sm text-white/70 break-words">{report.description}</p>
                 </div>
-                <span className="text-white/20 text-xs whitespace-nowrap">{timeAgo(report.reported_at)}</span>
+                <span className="text-white/20 text-xs whitespace-nowrap flex-shrink-0">{timeAgo(report.reported_at)}</span>
               </div>
             </div>
           ))}
