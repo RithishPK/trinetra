@@ -16,12 +16,17 @@ export default function DocumentVerifier() {
     try {
       const formData = new FormData()
       formData.append("file", file)
-      const res = await axios.post("https://trinetra-backend-209a.onrender.com/api/document-verify/analyze", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-      })
+      const res = await axios.post(
+        "https://trinetra-backend-209a.onrender.com/api/document-verify/analyze",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          timeout: 120000
+        }
+      )
       setResult(res.data)
     } catch (e) {
-      setError("Analysis failed. Make sure the backend is running and file is a text-based PDF.")
+      setError("Analysis failed. Backend may be starting up — please wait 30 seconds and try again.")
     } finally {
       setLoading(false)
     }
@@ -74,7 +79,7 @@ export default function DocumentVerifier() {
         disabled={!file || loading}
         className="w-full mt-4 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
       >
-        {loading ? "Analysing..." : "Verify Document"}
+        {loading ? "Analysing... (first load may take 60s)" : "Verify Document"}
       </button>
 
       {error && <p className="mt-4 text-red-400 text-sm">{error}</p>}
