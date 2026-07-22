@@ -19,6 +19,7 @@ export default function DigitalArrestDetector() {
   { text },
   { timeout: 120000 }
 )
+      setResult(res.data)
     } catch (e) {
       setError("Analysis failed. Make sure the backend is running.")
     } finally {

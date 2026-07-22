@@ -47,7 +47,7 @@ export default function ScamReportFeed() {
     if (!form.description.trim()) return
     setSubmitting(true)
     try {
-      await axios.post("http://localhost:8000/api/scam-report/report", form)
+      await axios.post("https://trinetra-backend-209a.onrender.com/api/scam-report/report", form)
       setSubmitted(true)
       setShowForm(false)
       setForm({ scam_type: "Digital Arrest", description: "", city: "", state: "Karnataka" })
