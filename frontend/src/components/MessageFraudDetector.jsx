@@ -14,7 +14,11 @@ export default function MessageFraudDetector() {
     setError("")
     setResult(null)
     try {
-      const res = await axios.post("https://trinetra-backend-209a.onrender.com/api/message-fraud/analyze", { text })
+      const res = await axios.post(
+  "https://trinetra-backend-209a.onrender.com/api/message-fraud/analyze",
+  { text },
+  { timeout: 120000 }
+)
       setResult(res.data)
     } catch (e) {
       setError("Analysis failed. Make sure the backend is running.")
@@ -53,7 +57,7 @@ export default function MessageFraudDetector() {
         disabled={!text.trim() || loading}
         className="w-full py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 transition-opacity"
       >
-        {loading ? "Analysing..." : "Analyse Message"}
+        {loading ? "Analysing... (first load may take 60s)" : "Analyse Message"}
       </button>
 
       {error && <p className="mt-4 text-red-400 text-sm">{error}</p>}
